@@ -1,0 +1,72 @@
+-- creates tables to insert csv data into
+CREATE TABLE bike_share.b0 (
+	dteday TEXT,
+	season INT,
+	yr INT,
+	mnth INT,
+	hr INT,
+	holiday INT,
+	weekday INT,
+	workingday INT,
+	weathersit INT,
+	temp FLOAT,
+	atemp FLOAT,
+	hum FLOAT,
+	windspeed FLOAT,
+	rider_type TEXT,
+	riders INT
+);
+
+CREATE TABLE bike_share.b1 (
+	dteday TEXT,
+	season INT,
+	yr INT,
+	mnth INT,
+	hr INT,
+	holiday INT,
+	weekday INT,
+	workingday INT,
+	weathersit INT,
+	temp FLOAT,
+	atemp FLOAT,
+	hum FLOAT,
+	windspeed FLOAT,
+	rider_type TEXT,
+	riders INT
+);
+
+-- changes dteday data type to date
+ALTER TABLE bike_share.b0
+	ALTER COLUMN dteday TYPE DATE
+	USING TO_DATE(dteday, 'DD-MM-YYYY');
+
+ALTER TABLE bike_share.b1
+	ALTER COLUMN dteday TYPE DATE
+	USING TO_DATE(dteday, 'DD-MM-YYYY');
+
+-- creates cte to union the two tables, excluding nulls
+-- creates two new columns using, revenue and profit
+-- left joins the cost table to the cte, bringing the price and cogs columns into the result
+WITH cte AS (
+SELECT *
+FROM bike_share.b0
+UNION
+SELECT * 
+FROM bike_share.b1
+ORDER BY dteday
+)
+SELECT 
+	a.dteday,
+	a.season,
+	a.yr,
+	a.weekday,
+	a.hr,
+	a.rider_type,
+	a.riders,
+	c.price,
+	c.cogs,
+	ROUND(a.riders*c.price::numeric, 2) AS revenue,
+	ROUND((a.riders*c.price-c.cogs)::numeric, 2) AS profit
+FROM
+	cte a LEFT JOIN bike_share.cost c
+	ON a.yr = c.yr;
