@@ -3,10 +3,10 @@
 
 Bike Sales Analysis with SQL & Power BI
 
-🧠 Overview:
+ ## Overview:
 Analyzed bike sales data to uncover revenue trends, peak business hours, and customer demographics. Used PostgreSQL for querying the dataset and Power BI to create an interactive dashboard.
 
-🛠️ Tools Used:
+## Tools Used:
 
 PostgreSQL (for data storage and querying)
 
@@ -14,7 +14,7 @@ Power BI (for data visualization and dashboard creation)
 
 SQL (for filtering, aggregating, and joining data)
 
-📈 Key Insights:
+## Key Insights:
 
 Peak sales hours are between 10 AM – 3 PM and 5 PM – 6 PM.
 
@@ -24,7 +24,7 @@ Season 3 shows the highest sales with $4.9M in revenue.
 
 2022 outperformed 2021 in both revenue and rider count.
 
-📊 Dashboard Features:
+## Dashboard Features:
 
 KPIs: Revenue, Profit, Riders, Profit Margin
 
